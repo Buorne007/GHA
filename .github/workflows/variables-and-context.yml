@@ -50,6 +50,7 @@ jobs:
   #access/set env variables
   job4:
     runs-on: ubuntu-latest
+    # define variables at job level
     env:
       VAR2: myjobvar2
       VAR3: myjobvar3
