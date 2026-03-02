@@ -1,12 +1,12 @@
-name: Basic Workflow
-on:
-  workflow_dispatch:
-    inputs:
-      name: 
-        default: "World"
-        description: "Your name."
-        required: true
-        type: string
+name: Basic Workflow #display name of workflow
+on: # based on what event will the workflow be triggered/run
+  workflow_dispatch: # provide button to run workflow (not automatic run)
+    inputs: #inputs to get from operator
+      name: #input variable is name
+        default: "World" # default value if operator does not provide an answer
+        description: "Your name." # description of the input variable
+        required: true # input must be provided
+        type: string # string, choice, boolean, number
 
       city:
         default: "None"
@@ -22,14 +22,14 @@ on:
         description: "Your favourite color is blue."
         required: true
         type: boolean
-jobs:
-  greet:
-    name: "Grettings, from program"
-    runs-on:
-      - ubuntu-latest
-    steps:
-      - name: Send greetings
-        run: |
+jobs: # jobs to be run. Workflow can be madeup of one or more jobs
+  greet: #name of the job. This workflow has just 1 job called greet
+    name: "Grettings, from program" #display name of the job
+    runs-on: #where the job should run
+      - ubuntu-latest #type of runner where job will run windows-latest, macos-latest, ubuntu-latest
+    steps: #sequence of tasks to be executed
+      - name: Send greetings #task 1 display name
+        run: | #command/operation to be execurted
           echo "Hello ${{ github.event.inputs.name }}"
           echo "Your Favourite city is ${{ github.event.inputs.city }}"
           echo "Your favourite color is ${{ github.event.inputs.color }}"
