@@ -7,7 +7,7 @@ on:
         description: 'Person to greet.'
         default: 'World'
         required: true
-#define environmental variables
+#define global environmental variables at workflow level
 env:
   VAR1: myworkflowvar1
   VAR2: myworkflowvar2
@@ -33,11 +33,12 @@ jobs:
     steps:
       - name: step 1
         id: step1 #id value that we can reference
-        run: echo "step1value=hello" >> $GITHUB_OUTPUT #step1value if a variable of id step1 
+        #step1value is a variable of id step1 
+        run: echo "step1value=hello" >> $GITHUB_OUTPUT 
 
       - name: step 2
         id: step2 #id value that we can reference
-        run: echo "step2value=hello" >> $GITHUB_OUTPUT
+        run: echo "step2value=world" >> $GITHUB_OUTPUT
 
   job3: #we access output variables from job2
     name: job3
@@ -45,5 +46,25 @@ jobs:
     needs: job2 #job3 needs job2 to complete w/o errors
     steps:
       - run: echo ${{ needs.job2.outputs.output1 }} ${{ needs.job2.outputs.output2 }}
+
+  #access/set env variables
+  job4:
+    runs-on: ubuntu-latest
+    env:
+      VAR2: myjobvar2
+      VAR3: myjobvar3
+    steps:
+      - run: |
+          echo $VAR1
+          echo ${{ env.VAR1 }}
+
+          echo ""
+
+          echo $VAR2
+
+          echo $VAR3
+
+        env:
+          VAR3: mystepvar3
         
  
