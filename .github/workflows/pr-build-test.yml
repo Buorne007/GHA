@@ -19,10 +19,10 @@ jobs:
           dotnet-version: "8.0.x" #specify the dotnet version to be used
       #run dotnet restore
       - name: Restore dependencies
-        run: dotnet restore "${{ github.workspace }}/src/my-web-app.sln"
+        run: dotnet restore "${{github.workspace}}/src/my-web-app.sln"
       #build dotnet
       - name: Build
-        run: dotnet build "${{ github.workspace }}/src/my-web-app.sln" --no-restore --configuration
+        run: dotnet build "${{github.workspace}}/src/my-web-app.sln" --no-restore --configuration Release
       #Testing
       - name: Testing
         run: dotnet test "${{ github.workflow }}/src/my-web-app.sln" --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
