@@ -43,7 +43,7 @@ jobs:
     name: Job 4
     runs-on: ubuntu-latest
     if: always() #tells job 4 to always run irrespective of if job 2 or 3 runs
-    needs: 
+    needs: #all conditions must be true. i.e job-2 and job-3 must not just run but pass.
       - job-2
       - job-3
     steps:
