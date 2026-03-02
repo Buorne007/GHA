@@ -25,7 +25,7 @@ jobs:
         run: dotnet build "${{github.workspace}}/src/my-web-app.sln" --no-restore --configuration Release
       #Testing
       - name: Testing
-        run: dotnet test "${{ github.workflow }}/src/my-web-app.sln" --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
+        run: dotnet test "${{github.workspace}}/src/my-web-app.sln" --no-restore --logger:"junit;LogFilePath=${{github.workspace}}/results/test-results.xml"
       # create a test summary markdown file
       # failure to specify output file, it will automatically add as a job summary
       # if we specify an output file, we have to create our own step of adding it to the job summary
@@ -42,11 +42,11 @@ jobs:
         run: |
           echo "TEST RESULTS: " >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY # blank line
-          cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
+          cat "${{github.workspace}}/results/summary.md" >> $GITHUB_STEP_SUMMARY
         if: always()
 
       - name: Publish
-        run: dotnet publish "${{ github.workspace }}/src/my-web-app/my-web-app.csproj" -c Release -o mywebapp
+        run: dotnet publish "${{github.workspace}}/src/my-web-app/my-web-app.csproj" -c Release -o mywebapp
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
